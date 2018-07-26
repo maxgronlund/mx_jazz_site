@@ -22,3 +22,18 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+* migrations
+  # when creating a new table
+  t.references :user, type: :uuid
+
+  # when modifying an existing table
+  add_column :books, :user_id, :uuid
+
+* user profile
+  https://openid.net/specs/openid-connect-basic-1_0.html
+
+require 'net/http'
+url = URI.parse('https://mx-address-server-001.herokuapp.com/api/v1/mx_address_servers')
+
+response = HTTParty.get('https://mx-address-server-001.herokuapp.com/api/v1/mx_address_servers.json')
