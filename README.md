@@ -20,6 +20,11 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
+  $ git push origin master
+  $ heroku run rake db:migrate --app mx-jazz-site
+
+* Logging on heroku
+  $ heroku logs --tail --app mx-jazz-site
 
 * ...
 

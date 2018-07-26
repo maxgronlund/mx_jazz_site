@@ -1,7 +1,7 @@
 class System::Host < ApplicationRecord
 
   def self.url
-    find_by(default: true)[:url]
+    System::AddressServer.first.url
   end
 
   def self.site_name
@@ -38,17 +38,4 @@ class System::Host < ApplicationRecord
       .get(url + '/api/v1/mx_public_ledgers.json', format: :plain)
     JSON.parse( response, symbolize_names: true)
   end
-
-  # def self.authentication_providers
-  #   address_servers.first[:url]
-  #   response =
-  #     HTTParty
-  #     .get(url + '/api/v1/mx_authentication_providers.json', format: :plain)
-  #   JSON.parse( response, symbolize_names: true)
-  # end
-
-  # def self.authentication_provider
-  #   authentication_providers.first
-  # end
-
 end

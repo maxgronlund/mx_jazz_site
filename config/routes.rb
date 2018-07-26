@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :system do
+    resources :address_servers
+  end
   resources :session
   namespace :system do
     get 'admin/index'
