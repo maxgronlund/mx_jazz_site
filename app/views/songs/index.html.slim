@@ -1,0 +1,26 @@
+h1 Songs
+
+table
+  thead
+    tr
+      th
+      th Title
+      / th Price
+      / th UUID
+      / th
+      / th
+      / th
+
+  tbody
+    - @songs.each do |song|
+      tr
+        td = link_to '[>]Play', play_song_path(song.uuid), method: 'PUT', remote: true, class: 'song_play_link', id: song.uuid
+        td = song.title
+        / td = song.price
+        / td = song.uuid
+        / td = link_to 'Show', song
+        / td = link_to 'Edit', edit_song_path(song)
+        / td = link_to 'Destroy', song, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+/ = link_to 'New Song', new_song_path

@@ -65,7 +65,8 @@ class User < ApplicationRecord
 
   def self.permission_from_ledger(id)
     headers = {
-      "Id" => id
+      'GrantedTo' => Rails.configuration.uuid,
+      "GivenBy" => id
     }
 
     response =

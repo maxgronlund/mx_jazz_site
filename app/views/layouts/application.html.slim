@@ -18,10 +18,12 @@ html
       '&nbsp;|&nbsp;
       =< link_to 'My Account', user_path(current_user.uuid)
       '&nbsp;|&nbsp;
+      =< link_to 'Songs', songs_path
+      '&nbsp;|&nbsp;
       =< link_to 'Log out', session_path(1), method: :delete
     - else
       = link_to 'Sign up', sign_up_index_path
       '&nbsp;|&nbsp;
       =< link_to 'Log in', new_session_path
-
+    hr
     = yield

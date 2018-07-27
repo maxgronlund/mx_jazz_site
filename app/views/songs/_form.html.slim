@@ -1,0 +1,11 @@
+= simple_form_for(@song) do |f|
+  = f.error_notification
+
+  .form-inputs
+    / = f.input :uuid
+    = f.input :title
+    = f.input :price
+    / = f.input :license
+
+  .form-actions
+    = f.button :submit

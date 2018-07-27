@@ -38,6 +38,7 @@ gem 'slim-rails'
 gem 'simple_form'
 gem 'httparty'
 gem 'awesome_print'
+gem 'jquery-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
