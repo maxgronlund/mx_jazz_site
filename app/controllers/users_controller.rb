@@ -1,59 +1,36 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :destroy]
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    if @user.name.nil?
+      flash[:notice] = 'You have to provide a name'
+      redirect_to edit_user_path(@user.uuid)
+      return
+    end
   end
 
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # GET /users/1/edit
   def edit
-  end
-
-  # POST /users
-  # POST /users.json
-  def create
-    params.permit!
-    params[:user][:password_digest] =  params[:user][:password]
-    params[:user].delete :password
-    params[:user].delete :password_confirmation
-
-
-    redirect_to sign_up_index_path
-    #@user = User.new(user_params)
-    #respond_to do |format|
-    #  if @user.save
-    #    format.html { redirect_to @user, notice: 'User was successfully created.' }
-    #    format.json { render :show, status: :created, location: @user }
-    #  else
-    #    format.html { render :new }
-    #    format.json { render json: @user.errors, status: :unprocessable_entity }
-    #  end
-    #end
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    uuid = user_params[:uuid]
+    @user = User.find_by(uuid: uuid)
+    if @user.update(user_params)
+      @user.update_profile_in_ledger
+      redirect_to user_path(@user.uuid)
+    else
+      render :edit
     end
   end
 
@@ -68,13 +45,32 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find_by(uuid: params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:name, :given_name, :family_name, :nickname, :preferred_username, :profile, :picture, :website, :email, :email_verified, :gender, :birthdate, :zoneinfo, :locale, :phone_number, :phone_number_verified, :address)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user)
+      .permit(
+        :name,
+        :given_name,
+        :family_name,
+        :nickname,
+        :preferred_username,
+        :profile, :picture,
+        :website,
+        :email,
+        :email_verified,
+        :gender,
+        :birthdate,
+        :zoneinfo,
+        :locale,
+        :phone_number,
+        :phone_number_verified,
+        :address,
+        :uuid
+      )
+  end
 end

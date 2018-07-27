@@ -1,6 +1,8 @@
-h1 Log in
-h3 = params[:id]
-
+h1 = "Welcome to #{Rails.configuration.site_name}"
+- if params[:id].present?
+  h3
+    'Your account was success fully created
+h3 Log in
 = form_tag(session_index_path, :method => "POST") do
 
   = label_tag(:email, "email:")

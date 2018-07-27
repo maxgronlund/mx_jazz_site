@@ -1,3 +1,4 @@
+hr
 p#notice = notice
 
 p
@@ -52,6 +53,8 @@ p
   strong Address:
   = @user.address
 
-=> link_to 'Edit', edit_user_path(@user)
+=> link_to 'Edit', edit_user_path(@user.uuid)
+'|
+=< link_to 'Edit permissions', edit_permission_path(SecureRandom.uuid)
 '|
 =< link_to 'Back', users_path

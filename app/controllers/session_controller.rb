@@ -1,73 +1,28 @@
 class SessionController < ApplicationController
   def new
     id = params[:id]
-    @user   = get_user(id)
+    return if id.nil?
+    @user   = User.from_ledger(id)
     @email = @user[:email]
   end
 
   def create
     params.permit!
     email =  params[:email]
+    user_from_ledger  = User.from_ledger_by_email(email)
 
-    user = get_user_by_email(email)
-
-    get_permission( user[:uuid] )
+    @permission = User.permission_from_ledger( user_from_ledger[:uuid] )
+    if @permission[:permissions].nil?
+      session[:user_id] = user_from_ledger[:uuid]
+      current_user.copy_profile_from_ledger(user_from_ledger)
+      redirect_to edit_permission_path(@permission[:uuid])
+      return
+    end
     redirect_to new_session_path
   end
 
-  def user(id)
-    @user ||= get_user(id)
+  def destroy
+    session.delete :user_id
+    redirect_to root_path
   end
-
-  def get_user(id)
-    headers = {
-      "Id"  => id
-    }
-
-    response =
-      HTTParty
-      .get(
-        public_ledger[:url] + '/api/v1/users/'+ SecureRandom.uuid,
-        format: :plain,
-        headers: headers)
-    JSON.parse( response, symbolize_names: true)
-  end
-
-  def get_user_by_email(email)
-    headers = {
-      "Email"  => email
-    }
-
-    response =
-      HTTParty
-      .get(
-        public_ledger[:url] + '/api/v1/user_by_email/'+ SecureRandom.uuid,
-        format: :plain,
-        headers: headers)
-    JSON.parse( response, symbolize_names: true)
-  end
-
-  def public_ledger
-    @public_ledger ||= System::Host.public_ledger
-  end
-
-  #def authentication_provider
-  #  @authentication_provider ||= System::Host.authentication_provider
-  #end
-
-  def get_permission(user_uuid)
-    headers = {
-      "GrantedTo"  => Rails.configuration.uuid,
-      "GivenBy" => user_uuid
-    }
-
-    response =
-      HTTParty
-      .get(
-        public_ledger[:url] + '/api/v1/permissions/'+ SecureRandom.uuid,
-        format: :plain,
-        headers: headers)
-    JSON.parse( response, symbolize_names: true)
-  end
-
 end

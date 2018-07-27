@@ -2,6 +2,7 @@
   = f.error_notification
 
   .form-inputs
+    = f.hidden_field :uuid, value: @user.uuid
     = f.input :name
     = f.input :given_name
     = f.input :family_name
