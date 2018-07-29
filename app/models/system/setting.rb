@@ -5,7 +5,7 @@ class System::Setting < ApplicationRecord
       .first_or_create(
         uuid: Rails.configuration.uuid,
         site_name: Rails.configuration.site_name,
-        administrator: System::Host.administrator
+        administrator: SecureRandom.uuid
       )
   end
 end

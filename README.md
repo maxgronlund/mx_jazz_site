@@ -24,6 +24,7 @@ Things you may want to cover:
   $ heroku run rake db:migrate --app mx-jazz-site
   $ heroku run rake db:migrate --app mx-pop-site
   $ heroku run rake db:migrate --app mx-rock-site
+  $ heroku run rake songs:add_rock_songs --app mx-rock-site
 
 
 
@@ -33,7 +34,7 @@ Things you may want to cover:
   $ heroku logs --tail --app mx-rock-site
 
 * Run console
-  $ heroku run rails console --app mx-jazz-site
+  $ heroku run rails console --app mx-rock-site
 
 * ...
 
