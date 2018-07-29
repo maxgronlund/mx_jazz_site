@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class System::HostTest < ActiveSupport::TestCase
+class System::SettingTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

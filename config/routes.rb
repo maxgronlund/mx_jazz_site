@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :system do
+    resources :settings
+  end
   resources :payments
   resources :play_song, only: %i[update]
   resources :songs
@@ -6,9 +9,6 @@ Rails.application.routes.draw do
   namespace :system do
     resources :address_servers
     get 'admin/index'
-  end
-  namespace :system do
-    resources :hosts
   end
   resources :session
   resources :sign_up, only: [:index]

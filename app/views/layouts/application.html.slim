@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title = Rails.configuration.site_name
+    title = System.settings.site_name
     = csrf_meta_tags
     = csp_meta_tag
 
@@ -9,7 +9,7 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
 
-    h4 = link_to Rails.configuration.site_name, root_path
+    h4 = link_to System.settings.site_name, root_path
 
     - if current_user
       = link_to 'Admin', system_admin_index_path

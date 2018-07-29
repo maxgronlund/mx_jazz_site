@@ -22,9 +22,16 @@ Things you may want to cover:
 * Deployment instructions
   $ git push origin master
   $ heroku run rake db:migrate --app mx-jazz-site
+  $ heroku run rake db:migrate --app mx-pop-site
+
+
 
 * Logging on heroku
   $ heroku logs --tail --app mx-jazz-site
+  $ heroku logs --tail --app mx-pop-site
+
+* Run console
+  $ heroku run rails console --app mx-jazz-site
 
 * ...
 

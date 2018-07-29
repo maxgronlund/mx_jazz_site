@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_28_061025) do
+ActiveRecord::Schema.define(version: 2018_07_29_172820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 2018_07_28_061025) do
   end
 
   create_table "system_hosts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "administrator"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "system_settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "site_name"
+    t.uuid "uuid"
     t.uuid "administrator"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

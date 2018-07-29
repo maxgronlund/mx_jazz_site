@@ -17,8 +17,8 @@ class PlaySongController < ApplicationController
         payment_for_type: song.class.name,
         title: song.title,
         time: DateTime.now,
-        site_id: Rails.configuration.uuid,
-        site_name: Rails.configuration.site_name
+        site_id: System.settings.uuid,
+        site_name: System.settings.site_name
       }
     }
   end

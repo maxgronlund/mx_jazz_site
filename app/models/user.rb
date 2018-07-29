@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   def update_permissions_in_ledger(permissions = {})
     headers = {
-      "GrantedTo"  => Rails.configuration.uuid,
+      "GrantedTo"  => System.settings.uuid,
       "GivenBy" => uuid
     }
 
@@ -51,7 +51,7 @@ class User < ApplicationRecord
   def self.from_ledger(id)
     headers = {
       "GivenBy"  => id,
-      "GrantedTo"  => Rails.configuration.uuid
+      "GrantedTo"  => System.settings.uuid
     }
 
     response =
@@ -65,7 +65,7 @@ class User < ApplicationRecord
 
   def self.permission_from_ledger(id)
     headers = {
-      'GrantedTo' => Rails.configuration.uuid,
+      'GrantedTo' => System.settings.uuid,
       "GivenBy" => id
     }
 

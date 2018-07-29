@@ -1,0 +1,10 @@
+= simple_form_for(@system_setting) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :site_name
+    = f.input :uuid
+    = f.input :administrator
+
+  .form-actions
+    = f.button :submit
