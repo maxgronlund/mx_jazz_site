@@ -5,18 +5,19 @@ table
     tr
       th
       th Title
-      / th Price
-      / th UUID
+      th Artist
+      th Price
+
       th
-      / th
-      / th
+
 
   tbody
     - @songs.each do |song|
       tr
         td = link_to '[>]Play', play_song_path(song.uuid), method: 'PUT', remote: true, class: 'song_play_link', id: song.uuid
         td = song.title
-        / td = song.price
+        td = song.artist
+        td = number_to_currency(song.price)
         / td = song.uuid
         td = link_to 'i', song
         / td = link_to 'Edit', edit_song_path(song)
