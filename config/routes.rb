@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :payments
   resources :play_song, only: %i[update]
   resources :songs
   resources :permissions, only: [:edit, :update]

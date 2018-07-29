@@ -26,4 +26,10 @@ html
       '&nbsp;|&nbsp;
       =< link_to 'Log in', new_session_path
     hr
+    - if current_user
+        small
+          = current_user.name
+          '&nbsp;&nbsp;|&nbsp;&nbsp;
+          'Account:&nbsp;
+          = current_user.uuid
     = yield

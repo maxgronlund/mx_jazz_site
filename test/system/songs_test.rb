@@ -14,7 +14,7 @@ class SongsTest < ApplicationSystemTestCase
     visit songs_url
     click_on "New Song"
 
-    fill_in "License", with: @song.license
+    fill_in "Pay to", with: @song.pay_to
     fill_in "Price", with: @song.price
     fill_in "Title", with: @song.title
     fill_in "Uuid", with: @song.uuid
@@ -28,7 +28,7 @@ class SongsTest < ApplicationSystemTestCase
     visit songs_url
     click_on "Edit", match: :first
 
-    fill_in "License", with: @song.license
+    fill_in "Pay to", with: @song.pay_to
     fill_in "Price", with: @song.price
     fill_in "Title", with: @song.title
     fill_in "Uuid", with: @song.uuid

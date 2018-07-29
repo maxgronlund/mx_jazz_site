@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Amount:
+  = @payment.amount
+p
+  strong Sender:
+  = @payment.sender
+p
+  strong Recipient:
+  = @payment.recipient
+p
+  strong Meta:
+  = @payment.meta
+
+=> link_to 'Edit', edit_payment_path(@payment)
+'|
+=< link_to 'Back', payments_path

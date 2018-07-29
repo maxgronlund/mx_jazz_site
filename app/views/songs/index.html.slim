@@ -7,7 +7,7 @@ table
       th Title
       / th Price
       / th UUID
-      / th
+      th
       / th
       / th
 
@@ -18,7 +18,7 @@ table
         td = song.title
         / td = song.price
         / td = song.uuid
-        / td = link_to 'Show', song
+        td = link_to 'i', song
         / td = link_to 'Edit', edit_song_path(song)
         / td = link_to 'Destroy', song, data: { confirm: 'Are you sure?' }, method: :delete
 

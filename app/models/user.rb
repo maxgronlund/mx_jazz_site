@@ -54,7 +54,7 @@ class User < ApplicationRecord
       "GrantedTo"  => Rails.configuration.uuid
     }
 
-    ap response =
+    response =
       HTTParty
       .get(
         public_ledger[:url] + '/api/v1/users/'+ SecureRandom.uuid,
@@ -94,5 +94,24 @@ class User < ApplicationRecord
 
   def self.public_ledger
     System::AddressServer.public_ledger
+  end
+
+  # usage
+  # User.send_payment(payment) =>
+  def self.send_payment(payment)
+    headers = {
+      "SenderUUID"  => payment[:sender],
+      "RecipientUUID" => payment[:recipient],
+      "TransactionType" => 'payment_for_usage'
+    }
+    response =
+      HTTParty
+      .post(
+        User.public_ledger[:url] + '/api/v1/transactions/',
+        format: :plain,
+        headers: headers,
+        body: payment.to_json
+      )
+    JSON.parse( response, symbolize_names: true)
   end
 end

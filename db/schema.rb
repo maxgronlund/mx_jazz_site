@@ -10,19 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_27_170413) do
+ActiveRecord::Schema.define(version: 2018_07_28_061025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+  create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.decimal "amount"
+    t.uuid "sender"
+    t.uuid "recipient"
+    t.hstore "meta"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "songs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "uuid"
     t.string "title"
     t.string "artist"
     t.decimal "price"
-    t.uuid "license"
+    t.uuid "pay_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -37,9 +46,7 @@ ActiveRecord::Schema.define(version: 2018_07_27_170413) do
   end
 
   create_table "system_hosts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "url"
-    t.boolean "default"
+    t.uuid "administrator"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
