@@ -45,12 +45,6 @@ ActiveRecord::Schema.define(version: 2018_07_29_172820) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "system_hosts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "administrator"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "system_settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "site_name"
     t.uuid "uuid"
